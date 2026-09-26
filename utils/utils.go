@@ -6,37 +6,34 @@ import (
 )
 
 func ColorMethod(method string) string {
-	var c string
+	str := fmt.Sprintf("%-6s", method)
 	switch method {
 	case http.MethodGet:
-		c = "\033[32m"
+		return Green(str)
 	case http.MethodPost:
-		c = "\033[34m"
+		return Yellow(str)
 	case http.MethodPut:
-		c = "\033[33m"
+		return Cyan(str)
 	case http.MethodDelete:
-		c = "\033[31m"
+		return Red(str)
 	case http.MethodPatch:
-		c = "\033[36m"
+		return Blue(str)
 	default:
-		c = "\033[37m"
+		return White(str)
 	}
-	return fmt.Sprintf("%s%-6s\033[0m", c, method)
 }
 
 func ColorStatus(code int) string {
-	var c string
 	switch {
 	case code >= 200 && code < 300:
-		c = "\033[32m"
+		return Green(ToString(code))
 	case code >= 300 && code < 400:
-		c = "\033[36m"
+		return Cyan(ToString(code))
 	case code >= 400 && code < 500:
-		c = "\033[33m"
+		return Yellow(ToString(code))
 	case code >= 500:
-		c = "\033[31m"
+		return Red(ToString(code))
 	default:
-		c = "\033[37m"
+		return White(ToString(code))
 	}
-	return fmt.Sprintf("%s%d\033[0m", c, code)
 }
